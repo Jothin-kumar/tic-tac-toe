@@ -7,6 +7,15 @@ root.title("Tic Tac Toe")
 tk.Label(root, text="Tic Tac Toe", font=('Ariel', 25)).pack()
 status_label = tk.Label(root, text="X's turn", font=('Ariel', 15), bg='green', fg='snow')
 status_label.pack(fill=tk.X)
+def play_again():
+    global current_chr
+    current_chr = 'X'
+    for point in XO_points:
+        point.button.configure(state=tk.NORMAL)
+        point.reset()
+    status_label.configure(text="X's turn")
+    play_again_button.pack_forget()
+play_again_button = tk.Button(root, text='Play again', font=('Ariel', 15), command=play_again)
 
 current_chr = "X"
 
@@ -38,7 +47,7 @@ class XOPoint:
         check_win()
 
     def reset(self):
-        self.button.configure(text="", bg='white')
+        self.button.configure(text="", bg='lightgray')
         if self.value == "X":
             X_points.remove(self)
         elif self.value == "O":
@@ -89,6 +98,7 @@ winning_possibilities = [
 def disable_game():
     for point in XO_points:
         point.button.configure(state=tk.DISABLED)
+    play_again_button.pack()
 def check_win():
     for possibility in winning_possibilities:
         if possibility.check('X'):
