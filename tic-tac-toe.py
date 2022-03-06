@@ -5,10 +5,13 @@ root.resizable(False, False)
 root.title("Tic Tac Toe")
 
 tk.Label(root, text="Tic Tac Toe", font=('Ariel', 25)).pack()
+status_label = tk.Label(root, text="X's turn", font=('Ariel', 15), bg='green', fg='snow')
+status_label.pack(fill=tk.X)
 
 current_chr = "X"
 
 play_area = tk.Frame(root, width=300, height=300, bg='white')
+XO_points = []
 X_points = []
 O_points = []
 class XOPoint:
@@ -27,9 +30,11 @@ class XOPoint:
             if current_chr == "X":
                 X_points.append(self)
                 current_chr = "O"
+                status_label.configure(text="O's turn")
             elif current_chr == "O":
                 O_points.append(self)
                 current_chr = "X"
+                status_label.configure(text="X's turn")
         check_win()
 
     def reset(self):
@@ -41,7 +46,7 @@ class XOPoint:
         self.value = None
 for x in range(1, 4):
     for y in range(1, 4):
-        XOPoint(x, y)
+        XO_points.append(XOPoint(x, y))
 class WinningPossibility:
     def __init__(self, x1, y1, x2, y2, x3, y3):
         self.x1 = x1
@@ -81,17 +86,22 @@ winning_possibilities = [
     WinningPossibility(1, 1, 2, 2, 3, 3),
     WinningPossibility(3, 1, 2, 2, 1, 3)
 ]
+def disable_game():
+    for point in XO_points:
+        point.button.configure(state=tk.DISABLED)
 def check_win():
-    print("Checking win")
     for possibility in winning_possibilities:
         if possibility.check('X'):
-            print("X won!")
+            status_label.configure(text="X won!")
+            disable_game()
             break
         elif possibility.check('O'):
-            print("O won!")
+            status_label.configure(text="O won!")
+            disable_game()
             break
     if len(X_points) + len(O_points) == 9:
-        print("Draw!")
+        status_label.configure(text="Draw!")
+        disable_game()
 play_area.pack(pady=10, padx=10)
 
 root.mainloop()
