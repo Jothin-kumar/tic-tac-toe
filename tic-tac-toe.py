@@ -90,6 +90,8 @@ def check_win():
         elif possibility.check('O'):
             print("O won!")
             break
+    if len(X_points) + len(O_points) == 9:
+        print("Draw!")
 play_area.pack(pady=10, padx=10)
 
 root.mainloop()
