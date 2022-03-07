@@ -16,6 +16,7 @@ h1 {
 #play-area {
     border: black solid 2px;
     overflow: hidden;
+    margin-bottom: 10px;
 }
 .square {
     width: 5em;
@@ -32,4 +33,9 @@ h1 {
 .square.clicked {
     background-color: red;
     color: white;
+}
+#play-again {
+    box-shadow: black 0 0 5px;
+    margin: auto;
+    display: none;
 }

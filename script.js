@@ -23,9 +23,6 @@ class XOSquare {
             checkWin();
         }
     }
-    reset() {
-        this.button.innerText = "";
-    }
 }
 function switchChr() {
     const statusLabel = document.getElementById("status");
@@ -110,6 +107,22 @@ function disableGame() {
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].disabled = true;
     }
+    const playAgainButton = document.getElementById("play-again");
+    playAgainButton.style.display = "block";
+}
+function playAgain() {
+    const buttons = document.getElementsByClassName("square");
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = false;
+        buttons[i].innerText = "";
+    }
+    XPoint = [];
+    OPoint = [];
+    currentChr = "X";
+    const statusLabel = document.getElementById("status");
+    statusLabel.innerText = "X's turn";
+    const playAgainButton = document.getElementById("play-again");
+    playAgainButton.style.display = "none";
 }
 function setup() {
     let squareElements = document.getElementsByClassName("square");
