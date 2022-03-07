@@ -10,6 +10,9 @@ body {
 h1 {
     color: red;
 }
+#status {
+    color: green;
+}
 #play-area {
     border: black solid 2px;
     overflow: hidden;

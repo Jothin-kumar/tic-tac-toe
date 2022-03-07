@@ -19,8 +19,8 @@ class XOSquare {
             } else {
                 OPoint.push(this);
             }
-            checkWin();
             switchChr();
+            checkWin();
         }
     }
     reset() {
@@ -28,10 +28,13 @@ class XOSquare {
     }
 }
 function switchChr() {
+    const statusLabel = document.getElementById("status");
     if (currentChr === "X") {
         currentChr = "O";
+        statusLabel.innerText = "O's turn";
     } else {
         currentChr = "X";
+        statusLabel.innerText = "X's turn";
     }
 }
 class winningPossibility {
@@ -86,26 +89,32 @@ const winningPossibilities = [
     new winningPossibility(3, 1, 2, 2, 1, 3)
 ]
 function checkWin() {
+    const statusLabel = document.getElementById("status");
     for (let i = 0; i < winningPossibilities.length; i++) {
         if (checkWinningPossibility(winningPossibilities[i], 'X')) {
-            console.log("X wins");
-            return;
+            statusLabel.innerText = "X wins";
+            disableGame();
         }
         if (checkWinningPossibility(winningPossibilities[i], 'O')) {
-            console.log("O wins");
-            return;
+            statusLabel.innerText = "O wins";
+            disableGame();
         }
     }
     if (XPoint.length + OPoint.length === 9) {
-        console.log("Draw");
+        statusLabel.innerText = "Draw";
+        disableGame();
+    }
+}
+function disableGame() {
+    const buttons = document.getElementsByClassName("square");
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true;
     }
 }
 function setup() {
-    let squares = [];
     let squareElements = document.getElementsByClassName("square");
     for (let i = 0; i < squareElements.length; i++) {
-        let square = new XOSquare(i % 3 + 1, Math.floor(i / 3) + 1, squareElements[i].id);
-        squares.push(square);
+        new XOSquare(i % 3 + 1, Math.floor(i / 3) + 1, squareElements[i].id);
     }
 }
 window.onload = setup;
