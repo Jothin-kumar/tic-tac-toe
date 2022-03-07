@@ -96,6 +96,9 @@ function checkWin() {
             return;
         }
     }
+    if (XPoint.length + OPoint.length === 9) {
+        console.log("Draw");
+    }
 }
 function setup() {
     let squares = [];
