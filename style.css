@@ -1,0 +1,32 @@
+body {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    box-shadow: black 0 0 10px;
+}
+h1 {
+    color: red;
+}
+#play-area {
+    border: black solid 2px;
+    overflow: hidden;
+}
+.square {
+    width: 5em;
+    height: 5em;
+    float: left;
+    border: black solid 1px;
+    background-color: white;
+    cursor: pointer;
+}
+.square:hover {
+    background-color: orange;
+    color: white;
+}
+.square.clicked {
+    background-color: red;
+    color: white;
+}
