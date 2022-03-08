@@ -6,22 +6,23 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
-<body>
-    <h1>Tic Tac Toe</h1>
-    <p id="status">X's turn</p>
-    <div id="play-area">
-        <button class="square" id="square1"></button>
-        <button class="square" id="square2"></button>
-        <button class="square" id="square3"></button>
+<body class="light-mode">
+    <h1 class="light-mode">Tic Tac Toe</h1>
+    <p id="status" class="light-mode">X's turn</p>
+    <button id="theme-switch" onclick="switchTheme()" class="light-mode">Switch Theme</button>
+    <div id="play-area" class="light-mode">
+        <button class="square light-mode" id="square1"></button>
+        <button class="square light-mode" id="square2"></button>
+        <button class="square light-mode" id="square3"></button>
         <br>
-        <button class="square" id="square4"></button>
-        <button class="square" id="square5"></button>
-        <button class="square" id="square6"></button>
+        <button class="square light-mode" id="square4"></button>
+        <button class="square light-mode" id="square5"></button>
+        <button class="square light-mode" id="square6"></button>
         <br>
-        <button class="square" id="square7"></button>
-        <button class="square" id="square8"></button>
-        <button class="square" id="square9"></button>
+        <button class="square light-mode" id="square7"></button>
+        <button class="square light-mode" id="square8"></button>
+        <button class="square light-mode" id="square9"></button>
     </div>
-    <button id="play-again" onclick="playAgain()">Play Again</button>
+    <button id="play-again" onclick="playAgain()" class="light-mode">Play Again</button>
 </body>
 </html>

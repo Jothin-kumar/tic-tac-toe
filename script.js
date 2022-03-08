@@ -131,3 +131,20 @@ function setup() {
     }
 }
 window.onload = setup;
+let currentTheme = 'light';
+function switchTheme() {
+    if (currentTheme === 'dark') {
+        document.querySelectorAll('.dark-mode').forEach(function (element) {
+            element.classList.remove('dark-mode');
+            element.classList.add('light-mode');
+        });
+        currentTheme = 'light';
+    }
+    else {
+        document.querySelectorAll('.light-mode').forEach(function (element) {
+            element.classList.remove('light-mode');
+            element.classList.add('dark-mode');
+        });
+        currentTheme = 'dark';
+    }
+}

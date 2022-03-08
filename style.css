@@ -1,4 +1,4 @@
-body {
+body.light-mode {
     position: absolute;
     text-align: center;
     top: 50%;
@@ -7,18 +7,19 @@ body {
     padding: 10px;
     box-shadow: black 0 0 10px;
 }
-h1 {
+h1.light-mode {
     color: red;
 }
-#status {
+#status.light-mode {
     color: green;
 }
-#play-area {
+#play-area.light-mode {
     border: black solid 2px;
     overflow: hidden;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
-.square {
+.square.light-mode {
     width: 5em;
     height: 5em;
     float: left;
@@ -26,15 +27,56 @@ h1 {
     background-color: white;
     cursor: pointer;
 }
-.square:hover {
+.square.light-mode:hover {
     background-color: orange;
     color: white;
 }
-.square.clicked {
+.square.clicked.light-mode {
     background-color: red;
     color: white;
 }
-#play-again {
+#play-again.light-mode {
+    box-shadow: black 0 0 5px;
+    margin: auto;
+    display: none;
+}
+
+body.dark-mode {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    box-shadow: white 0 0 10px;
+    background: black;
+}
+h1.dark-mode {
+    color: white;
+}
+#status.dark-mode {
+    color: blue;
+}
+#play-area.dark-mode {
+    border: white solid 2px;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.square.dark-mode {
+    width: 5em;
+    height: 5em;
+    float: left;
+    border: white solid 1px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+.square.dark-mode:hover {
+    background-color: gray;
+    color: white;
+}
+#play-again.dark-mode {
     box-shadow: black 0 0 5px;
     margin: auto;
     display: none;
