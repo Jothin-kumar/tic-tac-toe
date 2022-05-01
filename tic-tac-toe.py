@@ -104,11 +104,11 @@ def check_win():
         if possibility.check('X'):
             status_label.configure(text="X won!")
             disable_game()
-            break
+            return
         elif possibility.check('O'):
             status_label.configure(text="O won!")
             disable_game()
-            break
+            return
     if len(X_points) + len(O_points) == 9:
         status_label.configure(text="Draw!")
         disable_game()

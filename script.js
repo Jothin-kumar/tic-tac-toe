@@ -91,10 +91,12 @@ function checkWin() {
         if (checkWinningPossibility(winningPossibilities[i], 'X')) {
             statusLabel.innerText = "X wins";
             disableGame();
+            return;
         }
         if (checkWinningPossibility(winningPossibilities[i], 'O')) {
             statusLabel.innerText = "O wins";
             disableGame();
+            return;
         }
     }
     if (XPoint.length + OPoint.length === 9) {
