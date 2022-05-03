@@ -17,6 +17,22 @@ def play_again():
     play_again_button.pack_forget()
 play_again_button = tk.Button(root, text='Play again', font=('Ariel', 15), command=play_again)
 
+play_with = "Computer"
+def play_with_human():
+    global play_with
+    play_with = "Human"
+    play_with_button['text'] = "Play with computer"
+    play_with_button['command'] = play_with_computer
+    play_again()
+def play_with_computer():
+    global play_with
+    play_with = "Computer"
+    play_with_button['text'] = "Play with human"
+    play_with_button['command'] = play_with_human
+    play_again()
+play_with_button = tk.Button(root, text='Play with human', font=('Ariel', 15), command=play_with_human)
+play_with_button.pack()
+
 current_chr = "X"
 
 play_area = tk.Frame(root, width=300, height=300, bg='white')
@@ -45,6 +61,8 @@ class XOPoint:
                 current_chr = "X"
                 status_label.configure(text="X's turn")
         check_win()
+        if play_with == "Computer" and status_label['text'] == "O's turn":
+            auto_play()
 
     def reset(self):
         self.button.configure(text="", bg='lightgray')
