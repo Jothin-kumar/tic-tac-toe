@@ -65,26 +65,26 @@ class WinningPossibility:
         self.x3 = x3
         self.y3 = y3
     def check(self, for_chr):
-        p1_satisfied = False
-        p2_satisfied = False
-        p3_satisfied = False
+        self.p1_satisfied = False
+        self.p2_satisfied = False
+        self.p3_satisfied = False
         if for_chr == 'X':
             for point in X_points:
                 if point.x == self.x1 and point.y == self.y1:
-                    p1_satisfied = True
+                    self.p1_satisfied = True
                 elif point.x == self.x2 and point.y == self.y2:
-                    p2_satisfied = True
+                    self.p2_satisfied = True
                 elif point.x == self.x3 and point.y == self.y3:
-                    p3_satisfied = True
+                    self.p3_satisfied = True
         elif for_chr == 'O':
             for point in O_points:
                 if point.x == self.x1 and point.y == self.y1:
-                    p1_satisfied = True
+                    self.p1_satisfied = True
                 elif point.x == self.x2 and point.y == self.y2:
-                    p2_satisfied = True
+                    self.p2_satisfied = True
                 elif point.x == self.x3 and point.y == self.y3:
-                    p3_satisfied = True
-        return all([p1_satisfied, p2_satisfied, p3_satisfied])
+                    self.p3_satisfied = True
+        return all([self.p1_satisfied, self.p2_satisfied, self.p3_satisfied])
 winning_possibilities = [
     WinningPossibility(1, 1, 1, 2, 1, 3),
     WinningPossibility(2, 1, 2, 2, 2, 3),
@@ -113,5 +113,76 @@ def check_win():
         status_label.configure(text="Draw!")
         disable_game()
 play_area.pack(pady=10, padx=10)
+
+
+def auto_play():
+
+    # If winning is possible in the next move
+    for winning_possibility in winning_possibilities:
+        winning_possibility.check('O')
+        if winning_possibility.p1_satisfied and winning_possibility.p2_satisfied:
+            for point in XO_points:
+                if point.x == winning_possibility.x3 and point.y == winning_possibility.y3 and point not in X_points + O_points:
+                    point.set()
+                    return
+        elif winning_possibility.p2_satisfied and winning_possibility.p3_satisfied:
+            for point in XO_points:
+                if point.x == winning_possibility.x1 and point.y == winning_possibility.y1 and point not in X_points + O_points:
+                    point.set()
+                    return
+        elif winning_possibility.p3_satisfied and winning_possibility.p1_satisfied:
+            for point in XO_points:
+                if point.x == winning_possibility.x2 and point.y == winning_possibility.y2 and point not in X_points + O_points:
+                    point.set()
+                    return
+
+    # If the opponent can win in the next move
+    for winning_possibility in winning_possibilities:
+        winning_possibility.check('X')
+        if winning_possibility.p1_satisfied and winning_possibility.p2_satisfied:
+            for point in XO_points:
+                if point.x == winning_possibility.x3 and point.y == winning_possibility.y3 and point not in X_points + O_points:
+                    point.set()
+                    return
+        elif winning_possibility.p2_satisfied and winning_possibility.p3_satisfied:
+            for point in XO_points:
+                if point.x == winning_possibility.x1 and point.y == winning_possibility.y1 and point not in X_points + O_points:
+                    point.set()
+                    return
+        elif winning_possibility.p3_satisfied and winning_possibility.p1_satisfied:
+            for point in XO_points:
+                if point.x == winning_possibility.x2 and point.y == winning_possibility.y2 and point not in X_points + O_points:
+                    point.set()
+                    return
+
+    # If the center is free...
+    center_occupied = False
+    for point in X_points + O_points:
+        if point.x == 2 and point.y == 2:
+            center_occupied = True
+            break
+    if not center_occupied:
+        for point in XO_points:
+            if point.x == 2 and point.y == 2:
+                point.set()
+                return
+
+    # Occupy corner or middle based on what opponent occupies
+    corner_points = [(1, 1), (1, 3), (3, 1), (3, 3)]
+    middle_points = [(1, 2), (2, 1), (2, 3), (3, 2)]
+    num_of_corner_points_occupied_by_X = 0
+    for point in X_points:
+        if (point.x, point.y) in corner_points:
+            num_of_corner_points_occupied_by_X += 1
+    if num_of_corner_points_occupied_by_X >= 2:
+        for point in XO_points:
+            if (point.x, point.y) in middle_points and point not in X_points + O_points:
+                point.set()
+                return
+    elif num_of_corner_points_occupied_by_X < 2:
+        for point in XO_points:
+            if (point.x, point.y) in corner_points and point not in X_points + O_points:
+                point.set()
+                return
 
 root.mainloop()
